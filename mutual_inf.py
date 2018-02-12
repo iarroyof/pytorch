@@ -19,18 +19,4 @@ def shan_entropy(c):
     H = -sum(c_normalized* np.log2(c_normalized))  
     return H
 
-A = np.array([[ 2.0,  140.0,  128.23, -150.5, -5.4  ],
-              [ -20.4,  53.11, -13.34, -130.1, 999.5  ],
-              [ 1.2,  156.9,  120.11, -110.45,-1.12 ]])
 
-bins = 100 # ?
-n = A.shape[1]
-matMI = np.zeros((n, n))
-
-for ix in np.arange(n):
-    for jx in np.arange(ix+1,n):
-        matMI[ix,jx] = calc_MI(A[:,ix], A[:,jx], bins)
-
-print(matMI)
- 
-print(A)
