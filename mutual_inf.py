@@ -1,17 +1,22 @@
 import numpy as np
 
-def calc_MI(X,Y,bins):
+# Piratiado: https://kaushikghose.wordpress.com/2013/10/24/computing-mutual-information-and-other-scary-things/
 
-   c_XY = np.histogram2d(X,Y,bins)[0]
-   c_X = np.histogram(X,bins)[0]
-   c_Y = np.histogram(Y,bins)[0]
+def calc_MI(X,Y,bins, sparse=False):
+    if sparse:
+        X = X.toarray()[0]
+        Y = Y.toarray()[0]
 
-   H_X = shan_entropy(c_X)
-   H_Y = shan_entropy(c_Y)
-   H_XY = shan_entropy(c_XY)
+    c_XY = np.histogram2d(X,Y,bins)[0]
+    c_X = np.histogram(X,bins)[0]
+    c_Y = np.histogram(Y,bins)[0]
 
-   MI = H_X + H_Y - H_XY
-   return MI
+    H_X = shan_entropy(c_X)
+    H_Y = shan_entropy(c_Y)
+    H_XY = shan_entropy(c_XY)
+
+    MI = H_X + H_Y - H_XY
+    return MI
 
 def shan_entropy(c):
     c_normalized = c / float(np.sum(c))
